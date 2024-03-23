@@ -3,6 +3,7 @@
 """
 creating a class called BaseModel
 """
+import models
 from datetime import datetime
 import uuid
 
@@ -31,6 +32,9 @@ class BaseModel:
                     setattr(self, key, datetime.strptime(value, datetime_format))
                 else:
                     setattr(self, key, value)
+
+        else:
+            models.storage.new(self)
         
 
     def save(self):
