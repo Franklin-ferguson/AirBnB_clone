@@ -31,7 +31,7 @@ class BaseModel:
                 elif key == "created_at" or key == "updated_at":
                     self.__dict__[key] = datetime.strptime(value, datetime_format)
                 else:
-                    self.__dict__[key] = value)
+                    self.__dict__[key] = value
 
         else:
             self.id = str(uuid.uuid4())
