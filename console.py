@@ -8,29 +8,31 @@ import shlex
 """
 command line interface for testing Airbnb clone application
 """
+
+
 class HBNBCommand(cmd.Cmd):
     """
     Represents a class called HBNBCommand
     """
+
     all_classes = ["BaseModel"]
-    
+
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
         pass
-
 
     def do_quit(self, arg):
         """
         Quits the program
         """
-        return (True)
+        return True
 
     def do_EOF(self, arg):
         """
         end of file and quits the program
         """
         print()
-        return (True)
+        return True
 
     def do_help(self, arg):
         """
@@ -40,14 +42,13 @@ class HBNBCommand(cmd.Cmd):
 
     prompt = "(hbnb)"
 
-    
     def do_create(self, arg):
         """
         Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id
         """
-        command_passed  = shlex.split(arg)
+        command_passed = shlex.split(arg)
 
-        if len(command_passed) ==  0:
+        if len(command_passed) == 0:
             print("** class name missing **")
 
         elif command_passed[0] not in self.all_classes:
@@ -58,14 +59,13 @@ class HBNBCommand(cmd.Cmd):
             new_instance.save()
             print(new_instance.id)
 
-
     def do_show(self, arg):
         """
         Prints the string representation of an instance based on the class name and id
         """
-        command_passed  = shlex.split(arg)
+        command_passed = shlex.split(arg)
 
-        if len(command_passed) ==  0:
+        if len(command_passed) == 0:
             print("** class name missing **")
 
         elif command_passed[0] not in self.all_classes:
@@ -109,7 +109,6 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print("** no instance found **")
 
-
     def do_all(self, arg):
         """
         Prints all string representation of all instances based or not on the class name
@@ -125,14 +124,14 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
         else:
             for key, value in all_objects.items():
-                if key.split('.')[0] == command_passed[0]:
+                if key.split(".")[0] == command_passed[0]:
                     print(str(value))
 
     def do_update(self, arg):
         """
         Updates an instance based on the class name and id by adding or updating attribute
         """
-        
+
         command_passed = shlex.split(arg)
 
         if len(command_passed) == 0:
@@ -155,12 +154,12 @@ class HBNBCommand(cmd.Cmd):
             elif len(command_passed) < 3:
                 print("** attribute name missing **")
 
-            elif len(command_passed) <4:
+            elif len(command_passed) < 4:
                 print("** value missing **")
 
             else:
 
-                inst_object = all_objects [key]
+                inst_object = all_objects[key]
 
                 attribute_one = command_passed[2]
 
@@ -175,8 +174,7 @@ class HBNBCommand(cmd.Cmd):
                 setattr(inst_object, attribute_one, attribute_two)
 
                 inst_object.save()
-        
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     HBNBCommand().cmdloop()
-
