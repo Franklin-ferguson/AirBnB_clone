@@ -13,6 +13,11 @@ class HBNBCommand(cmd.Cmd):
     Represents a class called HBNBCommand
     """
     all_classes = ["BaseModel"]
+    
+    def emptyline(self):
+        """Do nothing upon receiving an empty line."""
+        pass
+
 
     def do_quit(self, arg):
         """
