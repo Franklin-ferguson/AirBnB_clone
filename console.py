@@ -41,7 +41,7 @@ class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb)"
 
     
-    def do_create(self):
+    def do_create(self, arg):
         """
         Creates a new instance of BaseModel, saves it (to the JSON file) and prints the id
         """
@@ -59,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
             print(new_instance.id)
 
 
-    def do_show(self):
+    def do_show(self, arg):
         """
         Prints the string representation of an instance based on the class name and id
         """
@@ -77,14 +77,14 @@ class HBNBCommand(cmd.Cmd):
         else:
             all_objects = storage.all()
 
-            key = "{}{.{}".format(command_passed[0], command_passed[1])
+            key = "{}.{}".format(command_passed[0], command_passed[1])
 
             if key in all_objects:
                 print(all_objects[key])
             else:
                 print("** no instance found **")
 
-    def do_destroy(arg):
+    def do_destroy(self, arg):
         """
         Deletes an instance based on the class name and id (save the change into the JSON file)
         """
