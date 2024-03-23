@@ -19,6 +19,13 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    
+    def all(self):
+        """
+        returns all ojects
+        """
+        return FileStorage.__objects
+
 
     def new(self, obj):
         """
@@ -31,11 +38,6 @@ class FileStorage:
 
         FileStorage.__object[key] = obj
 
-    def all(self):
-        """
-        returns all ojects
-        """
-        return FileStorage.__objects
 
     def dave(self):
         """
@@ -68,6 +70,6 @@ class FileStorage:
                             object_instance = class_name(**values)
 
                             File.Storage.__object[key] = object_instance
-                    except Exception:
-                        pass
+                    except FileNotFoundError:
+                        return
 
