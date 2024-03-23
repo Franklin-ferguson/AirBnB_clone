@@ -1,4 +1,4 @@
-!/usr/bin/python3
+#!/usr/bin/python3
 """
 Creating a file storage
 """
@@ -36,10 +36,10 @@ class FileStorage:
 
         key = "{}.{}".format(object_class_name, obj.id)
 
-        FileStorage.__object[key] = obj
+        FileStorage.__objects[key] = obj
 
 
-    def dave(self):
+    def save(self):
         """
         serialize the dictionary into json stirng
         """
@@ -53,23 +53,23 @@ class FileStorage:
         with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
             json.dump(full_dict, f)
 
-        def reload(self):
-            """
-            Deserializing the json string back to dictionary
-            """
-            if os.path.isfile(FileStorage.__file_path):
-                with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
-                    try:
-                        full_dict = json.load(f)
+    def reload(self):
+        """
+        Deserializing the json string back to dictionary
+        """
+        if os.path.isfile(FileStorage.__file_path):
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
+                try:
+                    full_dict = json.load(f)
 
-                        for key, value in full_dict.items():
-                            inst_class, obj_id = key.split('.')
+                    for key, value in full_dict.items():
+                        inst_class, obj_id = key.split('.')
 
-                            class_name = eval(inst_class)
+                        class_name = eval(inst_class)
 
-                            object_instance = class_name(**values)
+                        object_instance = class_name(**value)
 
-                            File.Storage.__object[key] = object_instance
-                    except FileNotFoundError:
-                        return
+                        FileStorage.__objects[key] = object_instance
+                except FileNotFoundError:
+                    return
 
