@@ -57,19 +57,13 @@ class FileStorage:
         """
         Deserializing the json string back to dictionary
         """
-        if os.path.isfile(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
-                try:
-                    full_dict = json.load(f)
-
-                    for key, value in full_dict.items():
-                        inst_class, obj_id = key.split('.')
-
-                        class_name = eval(inst_class)
-
-                        object_instance = class_name(**value)
-
-                        FileStorage.__objects[key] = object_instance
-                except FileNotFoundError:
-                    return
+        try:
+            with open(FileStorage.__file_path) as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
+        except FileNotFoundError:
+            return
 
