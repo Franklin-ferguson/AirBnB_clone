@@ -31,8 +31,8 @@ class BaseModel:
                     self.__dict__[key] = datetime.strptime(value, dt_format)
                 else:
                     self.__dict__[key] = value
-        else:
-            models.storage.new(self)
+        
+        models.storage.new(self)
 
     def save(self):
         """

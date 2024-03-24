@@ -3,7 +3,7 @@ from models.base_model import BaseModel
 from models import storage
 import cmd
 import shlex
-
+from models.user import User
 
 """
 command line interface for testing Airbnb clone application
@@ -15,7 +15,7 @@ class HBNBCommand(cmd.Cmd):
     Represents a class called HBNBCommand
     """
 
-    all_classes = ["BaseModel"]
+    all_classes = ["BaseModel", "User"]
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
@@ -55,8 +55,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
         else:
-            new_instance = BaseModel()
-            new_instance.save()
+            new_instance = eval(f"{command_passed[0]}()")
+            storage.save()
             print(new_instance.id)
 
     def do_show(self, arg):
