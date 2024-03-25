@@ -28,15 +28,15 @@ class TestState(unittest.TestCase):
         self.assertEqual(str, type(Amenity.name))
         self.assertNotIn("name", amenity_1.__dict__)
 
-    def test_state_not_the_same(self):
-        state_1 = State()
+    def test_city_not_the_same(self):
+        amenity_1 = Amenity()
         sleep(0.10)
-        state_2 = State()
+        amenity_2 = Amenity()
 
-        self.assertNotEqual(state_1, state_2)
+        self.assertNotEqual(amenity_1, amenity_2)
         
-        self.assertLess(state_1.created_up, state_2.created_up)
-        self.assertLess(state_1.updated_up, state_2.updated_up)
+        self.assertLess(amenity_1.created_up, amenity_2.created_up)
+        self.assertLess(amenity_1.updated_up, amenity_2.updated_up)
 
 
 
