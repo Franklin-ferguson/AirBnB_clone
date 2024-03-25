@@ -63,7 +63,8 @@ class HBNBCommand(cmd.Cmd):
         
 
         add_command_passed = input_method_name[1].split(')')[0]
-
+        
+        update_arg = add_command_passed.split(',')
 
         command_dict = {
                 'create': self.do_create,
@@ -76,8 +77,15 @@ class HBNBCommand(cmd.Cmd):
 
 
         if command_method in command_dict.keys():
-            return command_dict[command_method]("{} {}".format(input_class_name,
-                add_command_passed))
+            if command_method != "update":
+                return command_dict[command_method]("{} {}".format(input_class_name,
+                    add_command_passed))
+            else:
+                class_id = update_arg[0]
+                class_name = update_arg[1]
+                class_value = update_arg[2]
+
+                return command_dict[command_method]("{} {} {} {}".format(input_class_name, class_id, class_name, class_value))
 
         print("Incorrect syntax: {}***".format(arg))
         return False
