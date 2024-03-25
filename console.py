@@ -64,17 +64,47 @@ class HBNBCommand(cmd.Cmd):
         command_method = input_method_command[0]
 
         command_dict = {
-            "update": self.do_update,
-            "all": self.do_all,
-            "show": self.do_show,
-            "destroy": self.do_destroy,
+                'create': self.do_create,
+                'update': self.do_update,
+                'all': self.do_all,
+                'show': self.do_show,
+                'destroy': self.do_destroy,
+                'count': self.do_count
         }
+
 
         if command_method in command_dict.keys():
             return command_dict[command_method]("{} {}".format(input_class_name, ""))
 
         print("Incorrect syntax: {}***".format(arg))
         return False
+
+
+    def do_count(self, arg):
+        """
+        counts the number of instances of a class
+        """
+
+        all_objects = storage.all()
+        if arg:
+            command_passed = shlex.split(arg)
+        
+        input_class_name = command_passed[0]
+
+
+        count = 0
+
+        if command_passed:
+            if input_class_name in self.all_classes:
+                for i in all_objects.values():
+                    if i.__class__.__name__ == input_class_name:
+                        count += 1
+                print(count)
+            else:
+                print("*** Incorred class name ***")
+        else:
+            ("*** no command passed ***")
+
 
     def do_create(self, arg):
         """
