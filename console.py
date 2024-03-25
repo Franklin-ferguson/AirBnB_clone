@@ -4,6 +4,14 @@ from models import storage
 import cmd
 import shlex
 from models.user import User
+from models.user import User
+from models.state import State
+from models.city import City
+from models.place import Place
+from models.amenity import Amenity
+from models.review import Review
+
+
 
 """
 command line interface for testing Airbnb clone application
@@ -15,7 +23,7 @@ class HBNBCommand(cmd.Cmd):
     Represents a class called HBNBCommand
     """
 
-    all_classes = ["BaseModel", "User"]
+    all_classes = ["BaseModel", "User", "State", "City", "Place", "Amenity", "Review"]
 
     def emptyline(self):
         """Do nothing upon receiving an empty line."""
