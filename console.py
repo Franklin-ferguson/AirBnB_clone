@@ -12,7 +12,6 @@ from models.amenity import Amenity
 from models.review import Review
 
 
-
 """
 command line interface for testing Airbnb clone application
 """
@@ -49,6 +48,33 @@ class HBNBCommand(cmd.Cmd):
         print("Quit command to exit the program")
 
     prompt = "(hbnb)"
+
+    def default(self, arg):
+        """
+        updating cmd to accept <class name>.all()
+        """
+        input_command_list = arg.split(".")
+
+        input_class_name = input_command_list[0]
+
+        input_method = input_command_list[1]
+
+        input_method_command = input_method.split("(")
+
+        command_method = input_method_command[0]
+
+        command_dict = {
+            "update": self.do_update,
+            "all": self.do_all,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+        }
+
+        if command_method in command_dict.keys():
+            return command_dict[command_method]("{} {}".format(input_class_name, ""))
+
+        print("Incorrect syntax: {}***".format(arg))
+        return False
 
     def do_create(self, arg):
         """
