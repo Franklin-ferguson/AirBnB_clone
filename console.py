@@ -57,11 +57,13 @@ class HBNBCommand(cmd.Cmd):
 
         input_class_name = input_command_list[0]
 
-        input_method = input_command_list[1]
+        input_method_name = input_command_list[1].split('(')
 
-        input_method_command = input_method.split("(")
+        command_method = input_method_name[0]
+        
 
-        command_method = input_method_command[0]
+        add_command_passed = input_method_name[1].split(')')[0]
+
 
         command_dict = {
                 'create': self.do_create,
@@ -74,7 +76,8 @@ class HBNBCommand(cmd.Cmd):
 
 
         if command_method in command_dict.keys():
-            return command_dict[command_method]("{} {}".format(input_class_name, ""))
+            return command_dict[command_method]("{} {}".format(input_class_name,
+                add_command_passed))
 
         print("Incorrect syntax: {}***".format(arg))
         return False
